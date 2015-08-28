@@ -1,0 +1,6 @@
+---
+- hosts: vagrant
+  tasks:
+
+    - name: display all variables/facts known for the host
+      debug: var=hostvars[inventory_hostname].ohai_fqdn

@@ -1,1 +1,11 @@
+## These settings override the settings in all.yml
+##################################################
+
+# Web Role
+site_directory: /vagrant
+phpmyadmin_is_enabled: true
+
+# Database Role
 database_name: tasukuforce_development
+
+# Database Manager Settings
