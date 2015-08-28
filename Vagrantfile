@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
   }
 
   virtual_machines.each do |hostname, ip|
-    config.define hostname do |host|
+    config.vm.define hostname do |host|
       host.vm.network :private_network, ip: ip
       host.vm.hostname = "#{hostname}.wordpress.dev"
     end
