@@ -9,13 +9,13 @@
   lineinfile: >
     dest=/etc/redis/redis.conf
     line='maxmemory 256mb'
-
-- name: allocate memory for redis
-  lineinfile: >
-    dest=/etc/redis/redis.conf
-    line='maxmemory 256mb'
+  notify: restart redis
 
 - name: turn on LRU for redis to manage cache memory
   lineinfile: >
     dest=/etc/redis/redis.conf
     line='maxmemory-policy allkeys-lru'
+  notify: restart redis
+
+- name: ensure redis is running
+  service: name=redis-server enabled=yes

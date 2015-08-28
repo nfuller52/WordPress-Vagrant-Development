@@ -4,3 +4,6 @@
 
 - name: restart php5-fpm
   service: name=php5-fpm enabled=yes state=restarted
+
+- name: restart redis
+  service: name=redis-server enabled=yes state=restarted
