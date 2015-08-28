@@ -1,0 +1,5 @@
+[vagrant]
+tasukuforce.wordpress.dev
+
+[vagrant:vars]
+ansible_ssh_user=root

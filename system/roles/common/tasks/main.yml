@@ -1,0 +1,18 @@
+---
+- name: update apt
+  apt: update_cache=yes
+
+- name: upgrade apt
+  apt: upgrade=full
+
+- name: ensure sudo is installed
+  apt: pkg=sudo state=present
+
+- name: install base packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - vim
+    - wget
+    - git
+    - curl
+    - ntp

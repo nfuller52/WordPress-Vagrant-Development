@@ -9,8 +9,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder './app', '/vagrant', type: 'nfs'
 
   virtual_machines = {
-    'tasukuforce' => '10.0.0.100',
-    'tasukuforce-db' => '10.0.0.101'
+    'tasukuforce' => '10.0.0.100'
   }
 
   virtual_machines.each do |hostname, ip|
