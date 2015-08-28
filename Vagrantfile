@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = 'ubuntu/trusty64'
-  config.vm.synced_folder = './app', '/vagrant', type: 'nfs'
+  config.vm.synced_folder './app', '/vagrant', type: 'nfs'
 
   virtual_machines = {
     'tasukuforce' => '10.11.12.13'
