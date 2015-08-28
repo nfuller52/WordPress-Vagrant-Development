@@ -1,8 +1,7 @@
 ---
 - hosts: vagrant
-  remote_user: root
-  sudo: yes
   roles:
     - common
     - web
     - database
+    - database_manager
