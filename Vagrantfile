@@ -18,11 +18,5 @@ Vagrant.configure(2) do |config|
       host.vm.network :private_network, ip: ip
       host.vm.hostname = "#{hostname}.wordpress.dev"
     end
-
-    config.vm.provider 'virtualbox' do |vb|
-      vb.name = hostname
-      vb.memory = 1024
-      vb.cpus = 1
-    end
   end
 end
