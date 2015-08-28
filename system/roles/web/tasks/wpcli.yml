@@ -1,0 +1,8 @@
+---
+- name: download WordPress CLI
+  get_url: >
+    url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    dest=/usr/local/bin/wp
+
+- name: wp cli should be allowed to be ran by anyone
+  file: path=/usr/local/bin/wp mode=0755
