@@ -1,5 +1,6 @@
 ## These settings override the settings in all.yml
 ##################################################
+tasuku_environment: development
 
 # Web Role
 site_directory: /vagrant

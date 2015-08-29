@@ -1,0 +1,49 @@
+---
+- name: install mysql
+  apt: pkg={{ item }} state=present
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+
+- name: set the root password
+  mysql_user: >
+    login_user=root login_password={{ mysql_root_password }}
+    name=root password={{ mysql_root_password }}
+    check_implicit_admin=yes
+    host={{ item }}
+  with_items:
+    - "{{ hostvars[inventory_hostname].ohai_hostname | lower }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: remove anonymous users from the database
+  mysql_user: >
+    login_user=root login_password={{ mysql_root_password }}
+    name='' state=absent
+    host={{ item }}
+  with_items:
+    - localhost
+    - "{{ hostvars[inventory_hostname].ohai_hostname | lower }}"
+
+- name: remove the test database
+  mysql_db: >
+    login_user=root login_password={{ mysql_root_password }}
+    name=test state=absent
+
+- name: create the MySQL user for the WordPress database
+  mysql_user: >
+    login_user=root login_password={{ mysql_root_password }}
+    name={{ mysql_user }} password={{ mysql_password }}
+    priv={{ database_name }}.*:ALL,GRANT state=present
+
+- name: create the WordPress database
+  mysql_db: >
+    login_user=root login_password={{ mysql_root_password }}
+    name={{ database_name }} state=present
+    encoding=utf8 collation=utf8_general_ci
+  notify: restart mysql
+
+- name: ensure mysql is running
+  service: name=mysql state=started

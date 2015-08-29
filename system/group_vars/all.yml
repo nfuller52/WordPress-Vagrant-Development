@@ -1,5 +1,6 @@
 ## Global variables
 ##################################################
+tasuku_environment: production
 
 # Web Role
 site_directory: /app/site/
@@ -8,5 +9,8 @@ phpmyadmin_is_enabled: false
 
 # Database Role
 database_name: tasukuforce
+mysql_root_password: root1Password
+mysql_user: tasukuenforcer
+mysql_password: Kur0sak1
 
 # Database Manager Settings
