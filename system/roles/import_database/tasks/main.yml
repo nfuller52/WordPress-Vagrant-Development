@@ -1,0 +1,12 @@
+---
+- name: copy the vanilla database
+  copy: src=db.sql.gz dest=/root force=no
+  register: new_db_backup
+
+- name: import the database
+  mysql_db: >
+    login_user=root login_password={{ mysql_root_password }}
+    name={{ database_name }}
+    target=/root/db.sql.gz
+    state=import
+  when: new_db_backup|changed

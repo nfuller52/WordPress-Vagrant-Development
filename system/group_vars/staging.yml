@@ -1,6 +1,6 @@
 ## Global variables
 ##################################################
-tasuku_environment: production
+tasuku_environment: staging
 
 # Web Role
 site_directory: /app/site/
@@ -8,11 +8,9 @@ php_version: 5.6
 phpmyadmin_is_enabled: false
 
 # Database Role
-database_name: tasukuforce
+database_name: tasukuforce_staging
 mysql_root_password: root1Password
 mysql_user: tasukuenforcer
 mysql_password: Kur0sak1
-db_backup_user: dbbackup
-mysql_db_backup_user_password: SUP3r1--------
 
 # Database Manager Settings

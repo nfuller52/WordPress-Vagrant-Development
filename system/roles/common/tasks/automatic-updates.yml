@@ -1,0 +1,6 @@
+---
+- name: install automatic updates
+  apt: pkg=unattended-upgrades state=installed
+
+- name: adjust the apt update intervals
+  copy: src=apt_periodic dest=/etc/apt/apt.conf.d/10periodic

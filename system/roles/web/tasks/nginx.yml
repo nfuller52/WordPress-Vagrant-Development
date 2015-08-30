@@ -6,5 +6,8 @@
   template: src=wordpress.conf.j2 dest=/etc/nginx/sites-available/default
   notify: restart nginx
 
+- name: open port 80
+  ufw: rule=allow port=80 proto=tcp
+
 - name: ensure nginx is enabled
   service: name=nginx enabled=yes

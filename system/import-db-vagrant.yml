@@ -1,0 +1,4 @@
+---
+- hosts: vagrant
+  roles:
+    - import_database

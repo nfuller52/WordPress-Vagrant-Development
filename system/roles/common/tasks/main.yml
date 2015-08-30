@@ -2,9 +2,6 @@
 - name: update apt
   apt: update_cache=yes
 
-- name: upgrade apt
-  apt: upgrade=full
-
 - name: ensure sudo is installed
   apt: pkg=sudo state=present
 
@@ -16,3 +13,8 @@
     - git
     - curl
     - ntp
+    - fail2ban
+
+- include: firewall.yml
+- include: ssh-settings.yml
+- include: automatic-updates.yml

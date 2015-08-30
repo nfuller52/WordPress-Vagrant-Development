@@ -1,0 +1,35 @@
+---
+- name: create a user to interact with mysql
+  user: >
+    name={{ db_backup_user }} shell=/bin/bash home=/home/{{ db_backup_user }}/
+
+- name: create a bin directory for the backup user
+  file: >
+    dest=/home/{{ db_backup_user }}/bin
+    state=directory
+    owner={{ db_backup_user }}
+
+- name: install the backup shell script
+  template: >
+    src=db_backup.sh.j2 dest=/home/{{ db_backup_user }}/bin/db_backup.sh
+    owner={{ db_backup_user }}
+
+- name: give the backup user read access to the db
+  mysql_user: >
+    login_user=root login_password={{ mysql_root_password }}
+    name={{ db_backup_user }} password={{ mysql_db_backup_user_password }}
+    priv={{ database_name }}.*:SELECT,'LOCK TABLES'
+    state=present
+
+- name: create directory to store backups
+  file: >
+    dest=/home/{{ db_backup_user }}/backups
+    state=directory
+    owner={{ db_backup_user }}
+
+- name: schedule the backups
+  cron: >
+    name="database backup"
+    hour="0,4,8,16,20"
+    user={{ db_backup_user }}
+    job="/bin/bash /home/{{ db_backup_user }}/bin/db_backup.sh"

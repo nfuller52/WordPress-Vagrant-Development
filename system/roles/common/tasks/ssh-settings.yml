@@ -1,0 +1,11 @@
+---
+- name: open port 22
+  ufw: rule=allow port=22 proto=tcp
+
+- name: disallow password authentication
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    regexp="^PasswordAuthentication"
+    line="PasswordAuthentication no"
+    state=present
+  notify: restart ssh

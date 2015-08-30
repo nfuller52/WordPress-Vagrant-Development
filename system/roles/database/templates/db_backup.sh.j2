@@ -1,0 +1,8 @@
+#!bin/bash
+
+FILE=`date +"%Y-%m-%d-T-%H-%M"`_{{ database_name }}_db.sql.gz
+MYSQL_PASSWORD={{ mysql_db_backup_user_password }}
+BACKUP_DIR=/home/{{ db_backup_user }}/backups
+
+mysqldump --user={{ db_backup_user }} --password=${MYSQL_PASSWORD} {{ database_name }} | gzip -9 > ${BACKUP_DIR}/${FILE}
+find ${BACKUP_DIR} *_{{ database_name }}_db.sql.gz | sort | head -n -5 | xargs rm
