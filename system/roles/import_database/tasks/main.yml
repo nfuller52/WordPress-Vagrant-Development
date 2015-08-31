@@ -9,4 +9,3 @@
     name={{ database_name }}
     target=/root/db.sql.gz
     state=import
-  when: new_db_backup|changed
